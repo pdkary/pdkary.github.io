@@ -1,0 +1,34 @@
+mat-form-field{
+    width: 100%;
+    margin-top: 1em;
+    input{
+        margin-top:-1em;
+        width: 90%;
+    }
+}
+.datepicker {
+    width:100%;
+    padding: 1em;
+}
+mat-chip-list{
+    width:100%;
+}
+.datatable{
+    margin-top:-3em;
+    th {
+        font-family: 'Bungee Hairline';
+        font-weight: bold;
+        padding: 1em;
+        color:Black;
+    }
+    td {
+        padding: 1em 1.5em;
+        font-weight:bold;
+    }
+
+}
+mat-paginator{
+    position:absolute;
+    margin-top:30em;
+    background-color: #fafafa;
+}
