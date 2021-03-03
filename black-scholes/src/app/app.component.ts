@@ -10,6 +10,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 export class AppComponent {
   title = 'black-scholes';
   opened: boolean;
+  isMobile=false;
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
@@ -21,6 +22,7 @@ export class AppComponent {
     );
     if(window.outerHeight > window.outerWidth){
       this.opened=false;
+      this.isMobile=true;
     }
   }
   toggle_sidenav(){

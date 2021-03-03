@@ -16,7 +16,7 @@
       </mat-grid-tile>
 
       <mat-grid-tile
-        [rowspan]="isMobile ? tickers.length / 3 + 3 : 4"
+        [rowspan]="isMobile ? tickers.length / 3 + 3 : 2"
         [colspan]="6"
       >
         <mat-chip-list #chipList>
@@ -80,12 +80,13 @@
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile rowspan="3" colspan="2">
-        <button mat-raised-button color="primary" (click)="pull_data()">
-          Go
+        <button mat-stroked-button color="primary" (click)="pull_data()">
+          <mat-icon>search</mat-icon>
+          Search Options
         </button>
       </mat-grid-tile>
       <mat-grid-tile rowspan="2" [colspan]="isMobile ? 5 : 1">
-        <button mat-button color="primary" (click)="toggle_column_editor()">
+        <button mat-stroked-button color="primary" (click)="toggle_column_editor()">
           <mat-icon>settings</mat-icon>
           Adjust Columns
         </button>
