@@ -1,12 +1,13 @@
-import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, OnChanges, AfterViewInit, HostListener } from '@angular/core';
 import { BsmDataService } from '../bsm-data.service';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatChipInputEvent } from '@angular/material/chips';
+import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
 import { Observable } from 'rxjs';
 import { Moment } from 'moment';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 export interface BsmElement {
   symbol: string;
@@ -36,19 +37,24 @@ export interface BsmElement {
   templateUrl: './black-scholes.component.html',
   styleUrls: ['./black-scholes.component.scss']
 })
-export class BlackScholesComponent implements OnInit {
+export class BlackScholesComponent implements AfterViewInit {
   visible = true;
   selectable = true;
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   displayedColumns: string[]  = ["symbol", "expiration", "spot", "strike", "BSM_Value", "last", "bid", "ask", "breakeven", "openInterest", "delta", "gamma", "theta", "IV", "vol"];
+  mobileColumns: string[] = ["symbol", "expiration", "spot", "strike", "BSM_Value", "last", "delta"];
   columnsToDisplay: string[] = this.displayedColumns.slice();
   tickerCtrl = new FormControl();
+  isMobile: boolean = false;
+  show_column_editor:boolean = false;
 
   tickers: string[] = ['AAPL'];
   start_date: Moment | string;
   end_date: Moment | string;
   expr_map: Map<String, Array<String>>;
+  mode: Number = 0;
+  shiftInput: number = 0;
   
   bsmElements: BsmElement[] = [];
 
@@ -56,14 +62,30 @@ export class BlackScholesComponent implements OnInit {
   tickerInput!: ElementRef<HTMLInputElement>;
 
   @ViewChild('callPaginator') 
-  callPaginator!: MatPaginator;
+  callPaginator: MatPaginator;
 
   @ViewChild('putPaginator') 
-  putPaginator!: MatPaginator;
+  putPaginator: MatPaginator;
 
-  callDataSource = new MatTableDataSource<BsmElement>(this.bsmElements.filter((ele: BsmElement)=>ele.type=="CALL"));
-  putDataSource = new MatTableDataSource<BsmElement>(this.bsmElements.filter((ele: BsmElement)=>ele.type=="CALL"));
+  callDataSource:MatTableDataSource<BsmElement>; 
+  putDataSource:MatTableDataSource<BsmElement>;
 
+  call_table_rows: number = 5;
+  put_table_rows: number= 5;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event:any) {
+    let w = window.outerWidth;
+    let h = window.outerHeight;
+    if(h > w){
+      this.isMobile = true;
+      this.columnsToDisplay = this.mobileColumns;
+    }else{
+      this.isMobile = false;
+      this.columnsToDisplay = this.displayedColumns;
+    }
+    console.log(this.isMobile);
+  }
 
   range = new FormGroup({
     start: new FormControl(),
@@ -74,14 +96,26 @@ export class BlackScholesComponent implements OnInit {
     this.start_date = "";
     this.end_date = "";
     this.expr_map = new Map<String, Array<String>>();
+    this.bsmElements = [];
+    this.callDataSource = new MatTableDataSource<BsmElement>(this.bsmElements.filter((ele: BsmElement)=>ele.type=="CALL"));
+    this.putDataSource = new MatTableDataSource<BsmElement>(this.bsmElements.filter((ele: BsmElement)=>ele.type=="PUT"));
+    this.callDataSource.paginator = this.callPaginator;
+    this.putDataSource.paginator = this.putPaginator;
     this.range.get("end")?.valueChanges.subscribe(x => this.end_date = x);
     this.range.get("start")?.valueChanges.subscribe(x => this.start_date = x);
+    if(window.outerHeight > window.outerWidth){
+      this.isMobile=true;
+      this.columnsToDisplay = this.mobileColumns;
+    }
+  }
+  ngAfterViewInit(): void {
+    this.callDataSource.paginator = this.callPaginator;
+    this.putDataSource.paginator = this.putPaginator;
   }
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
-
     // Add our fruit
     if ((value || '').trim()) {
       const val = value.trim().toUpperCase();
@@ -90,7 +124,6 @@ export class BlackScholesComponent implements OnInit {
         this.expr_map.set(value, []);
       }
     }
-
     // Reset the input value
     if (input) {
       input.value = '';
@@ -99,7 +132,6 @@ export class BlackScholesComponent implements OnInit {
 
   remove(tkr: string): void {
     const index = this.tickers.indexOf(tkr);
-
     if (index >= 0) {
       this.tickers.splice(index, 1);
     }
@@ -110,15 +142,44 @@ export class BlackScholesComponent implements OnInit {
     let start_date = (this.start_date as Moment).format("Y-MM-DD");
     let end_date = (this.end_date as Moment).format("Y-MM-DD");
     let date_range = [start_date, end_date]
+    this.bsmElements = [];
     this.bsmDataService.set_tickers(this.tickers, .012).subscribe(x => {
-      this.bsmDataService.get_atm_multi_expr(undefined, date_range).subscribe(x=> {
-        let arr = (x as Array<any>);
-        arr.forEach(x => this.bsmElements.push(this.convert_row_to_bsm_element(x)));
-        this.callDataSource = new MatTableDataSource<BsmElement>(this.bsmElements.filter((ele: BsmElement)=>ele.type=="CALL"));
-        this.putDataSource = new MatTableDataSource<BsmElement>(this.bsmElements.filter((ele: BsmElement)=>ele.type=="CALL"));
-        this.callDataSource.paginator=this.callPaginator;
-        this.putDataSource.paginator=this.putPaginator;
-      });
+      if(this.mode==0){
+        this.bsmDataService.get_atm_multi_expr(undefined, date_range).subscribe(x=> {
+          let arr = (x as Array<any>);
+          arr.forEach(x => this.bsmElements.push(this.convert_row_to_bsm_element(x)));
+          this.callDataSource = new MatTableDataSource<BsmElement>(this.bsmElements.filter((ele: BsmElement)=>ele.type=="CALL"));
+          this.putDataSource = new MatTableDataSource<BsmElement>(this.bsmElements.filter((ele: BsmElement)=>ele.type=="PUT"));
+          this.callDataSource.paginator=this.callPaginator;
+          this.putDataSource.paginator=this.putPaginator;
+          this.call_table_rows = this.callPaginator.pageSize+10;
+          this.put_table_rows = this.putPaginator.pageSize+10;
+        });
+      }else if(this.mode==1){
+        console.log(this.shiftInput);
+        this.bsmDataService.get_atm_shift_abs_multi_expr(+this.shiftInput,undefined, date_range).subscribe(x=> {
+          let arr = (x as Array<any>);
+          arr.forEach(x => this.bsmElements.push(this.convert_row_to_bsm_element(x)));
+          this.callDataSource = new MatTableDataSource<BsmElement>(this.bsmElements.filter((ele: BsmElement)=>ele.type=="CALL"));
+          this.putDataSource = new MatTableDataSource<BsmElement>(this.bsmElements.filter((ele: BsmElement)=>ele.type=="PUT"));
+          this.callDataSource.paginator=this.callPaginator;
+          this.putDataSource.paginator=this.putPaginator;
+          this.call_table_rows = this.callPaginator.pageSize+10;
+          this.put_table_rows = this.putPaginator.pageSize+10;
+        });
+      }else if(this.mode==2){
+        console.log(this.shiftInput);
+        this.bsmDataService.get_atm_shift_rel_multi_expr(+this.shiftInput,undefined, date_range).subscribe(x=> {
+          let arr = (x as Array<any>);
+          arr.forEach(x => this.bsmElements.push(this.convert_row_to_bsm_element(x)));
+          this.callDataSource = new MatTableDataSource<BsmElement>(this.bsmElements.filter((ele: BsmElement)=>ele.type=="CALL"));
+          this.putDataSource = new MatTableDataSource<BsmElement>(this.bsmElements.filter((ele: BsmElement)=>ele.type=="PUT"));
+          this.callDataSource.paginator=this.callPaginator;
+          this.putDataSource.paginator=this.putPaginator;
+          this.call_table_rows = this.callPaginator.pageSize+10;
+          this.put_table_rows = this.putPaginator.pageSize+10;
+        });
+      }
     });
   }
 
@@ -127,8 +188,29 @@ export class BlackScholesComponent implements OnInit {
     return (bsm_ele as BsmElement);
   }
 
-  ngOnInit(): void {
-    this.callDataSource.paginator=this.callPaginator;
-    this.putDataSource.paginator=this.putPaginator;
+  handle_page_event(e:PageEvent,is_call:boolean){
+    if(is_call){
+      this.call_table_rows=this.callPaginator.pageSize+10;
+    }else {
+      this.put_table_rows=this.putPaginator.pageSize+10;
+    }
+  }
+  toggle_column_editor(){
+    this.show_column_editor= !this.show_column_editor;
+  }
+
+  toggle_column(i:number,e:MatCheckboxChange){
+    console.log(i,e);
+    console.log(this.displayedColumns[i]);
+    if(e.checked){
+      if(!this.columnsToDisplay.includes(this.displayedColumns[i])){
+        this.columnsToDisplay.splice(i,0,this.displayedColumns[i]);
+      }
+    }else{
+      if(this.columnsToDisplay.includes(this.displayedColumns[i])){
+        let idx = this.columnsToDisplay.indexOf(this.displayedColumns[i]);
+        this.columnsToDisplay.splice(idx,1);
+      }
+    }
   }
 }

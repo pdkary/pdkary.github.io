@@ -9,13 +9,21 @@ import { DomSanitizer } from "@angular/platform-browser";
 })
 export class AppComponent {
   title = 'black-scholes';
+  opened: boolean;
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
   ) {
+    this.opened = true;
     this.matIconRegistry.addSvgIcon(
       'pingfloyd',
       this.domSanitizer.bypassSecurityTrustResourceUrl("https://raw.githubusercontent.com/pdkary/pingfloyd/gh-pages/assets/pingfloydlogo.svg")
     );
+    if(window.outerHeight > window.outerWidth){
+      this.opened=false;
+    }
+  }
+  toggle_sidenav(){
+    this.opened = !this.opened;
   }
 }
