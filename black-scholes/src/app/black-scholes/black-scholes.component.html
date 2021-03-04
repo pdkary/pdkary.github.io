@@ -100,7 +100,7 @@
           <ng-container *ngFor="let column of displayedColumns; let i = index">
             <mat-checkbox
               (change)="toggle_column(i, $event)"
-              [checked]="columnsToDisplay.includes(displayedColumns[i])"
+              [checked]="columnsToDisplay.includes(displayedColumns[i])?true:false"
               >{{ displayedColumns[i] }}
             </mat-checkbox>
           </ng-container>
