@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/internal/Observable';
   providedIn: 'root'
 })
 export class BsmDataService {
-  _baseUrl = "http://54.175.250.21:8080";
+  _baseUrl = "https://54.175.250.21:8080";
   constructor(private http: HttpClient) { }
 
   set_tickers(tkrs:Array<String>,rfr:Number): Observable<Object> {
