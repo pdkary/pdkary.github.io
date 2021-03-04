@@ -43,7 +43,7 @@ export class BlackScholesComponent implements AfterViewInit {
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   displayedColumns: string[]  = ["symbol", "expiration", "spot", "strike", "BSM_Value", "last", "bid", "ask", "breakeven", "openInterest", "delta", "gamma", "theta", "IV", "vol"];
-  mobileColumns: string[] = ["symbol", "expiration", "spot", "strike", "BSM_Value", "last", "delta"];
+  mobileColumns: string[] = ["symbol", "spot", "strike", "BSM_Value", "last"];
   columnsToDisplay: string[] = this.displayedColumns.slice();
   tickerCtrl = new FormControl();
   isMobile: boolean = false;
