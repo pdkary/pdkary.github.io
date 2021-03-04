@@ -7,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonalComponent implements OnInit {
 
-  constructor() { }
+  projectPanelOpen: boolean;
+  constructor() {
+    this.projectPanelOpen = false;
+   }
 
   ngOnInit(): void {
   }

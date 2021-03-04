@@ -32,118 +32,158 @@
       </p>
     </div>
   </mat-grid-tile>
-  <mat-grid-tile colspan="12" rowspan="2">
-    <h1><u>Projects Overview</u></h1>
-  </mat-grid-tile>
-  <mat-grid-tile colspan="12" rowspan="14">
+</mat-grid-list>
+<mat-accordion>
+  <mat-expansion-panel
+    class="mat-elevation-z1"
+    (opened)="projectPanelOpen = true"
+    (closed)="projectPanelOpen = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h1><u>Projects Overview</u></h1>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
     <mat-card>
       <mat-card-header>
         <mat-card-title>
-            <h3><u><mat-icon >local_atm</mat-icon><a href="https://github.com/pdkary/black-scholes-plus" >Black Scholes Plus</a></u></h3>
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-      <div class="text">
-        <p>
-          <b>Purpose:</b> Estimate the value of stock options for given stocks,
-          at a desired expiration date and strike price.
-        </p>
-        <p>
-          <b>Usage:</b> User inputs the stock tickers they are interested in, as
-          well as expiration dates <b>(</b>one for all tickers / one for each
-          ticker / range<b>)</b> and strike prices <b>(</b>at the money / above
-          by x units / above by x percent<b>)</b>.
-          <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The
-          script then gathers all options that match these criteria, and
-          performa Black Scholes calculations, and data is returned in a pandas
-          DataFrame.
-        </p>
-        <p>
-          <b>Used Technology: </b> Angular11, Python3, numpy, pandas, scipy,
-          yahoofinance, flask,
-        </p>
-        <p><b> Check out the Black-Scholes tab for a demo! </b></p>
-      </div>
-      </mat-card-content>
-    </mat-card>
-  </mat-grid-tile>
-
-  <mat-grid-tile colspan="12" rowspan="12">
-  <mat-card>
-      <mat-card-header>
-        <mat-card-title>
-            <h3><u><mat-icon>games</mat-icon><a href="https://github.com/pdkary/SpigotHueLightPlugin">Spigot Hue Light Plugin</a></u></h3>
+          <h3>
+            <u
+              ><mat-icon>local_atm</mat-icon
+              ><a href="https://github.com/pdkary/black-scholes-plus"
+                >Black Scholes Plus</a
+              ></u
+            >
+          </h3>
         </mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div class="text">
-        <p>
-            <b>Purpose:</b> A minecraft plugin, written in java, allowing the user
-            to operate real-world Philips Hue Light bulbs with in game triggers
-        </p>
-        <p>
-            <b>Usage:</b> A player in minecraft may use a customized block to assign
-            levers/buttons/lanterns to connect with an exising Hue Bridge, and can
-            then operate lights with in game controls.
-        </p>
-        <p>
-            <b>Used Technology: </b>Java8, Maven, Lombok, FasterXml Jackson, Spigot,
-            Phillips Hue
-        </p>
+          <p>
+            <b>Purpose:</b> Estimate the value of stock options for given
+            stocks, at a desired expiration date and strike price.
+          </p>
+          <p>
+            <b>Usage:</b> User inputs the stock tickers they are interested in,
+            as well as expiration dates <b>(</b>one for all tickers / one for
+            each ticker / range<b>)</b> and strike prices <b>(</b>at the money /
+            above by x units / above by x percent<b>)</b>.
+            <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The
+            script then gathers all options that match these criteria, and
+            performa Black Scholes calculations, and data is returned in a
+            pandas DataFrame.
+          </p>
+          <p>
+            <b>Used Technology: </b> Angular11, Python3, numpy, pandas, scipy,
+            yahoofinance, flask,
+          </p>
+          <p><b> Check out the Black-Scholes tab for a demo! </b></p>
         </div>
-     </mat-card-content>
+      </mat-card-content>
     </mat-card>
-  </mat-grid-tile>
-  <mat-grid-tile colspan="12" rowspan="12">
-  <mat-card>
-  <mat-card-header>
-  <mat-card-title>
-    <h3><u><mat-icon>emoji_objects</mat-icon>Love Lights</u></h3>
-  </mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <div class="text">
-      <p>
-        <b>Purpose:</b> A cute gift for a long distance relationship that shows
-        I care without needing to buy something expensive
-      </p>
-      <p>
-        <b>Usage:</b> Each partner keeps a jar at their respective location,
-        when the button is pushed, the lights in both jars changes color along a
-        color wheel synchronously.
-      </p>
-      <p>
-        <b>Used Technology: </b> ESP8266, ArduinoIDE, AdafruitIO, a little bit
-        of solder
-      </p>
-    </div>
-    </mat-card-content>
-    </mat-card>
-  </mat-grid-tile>
-  <mat-grid-tile colspan="12" rowspan="12">
+
     <mat-card>
-  <mat-card-header>
-  <mat-card-title>
-    <h3><u><mat-icon>emoji_people</mat-icon>Kinect Gesture Recognition</u></h3>
-  </mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <div class="text">
-      <p>
-        <b>Purpose:</b> Allow an xbox kinect v1 to trigger a request over an
-        http server when a preconfigured gesture is recognized
-      </p>
-      <p>
-        <b>Usage:</b> User defines gesture by entering "training" mode, and
-        standing in the gesture position for about 1 minute, then in various
-        other positions around the area for another 2 minutes. This data is
-        stored as "Skeletons", and tensorflow is used to develop a
-        categorization of "gesture" or "not gesture". When gesture is triggered,
-        an http request is sent.
-      </p>
-      <p><b>Used Technology: </b> C#, Kinect V1 SDK, Python3 tensorflow</p>
-    </div>
-    </mat-card-content>
+      <mat-card-header>
+        <mat-card-title>
+          <h3>
+            <u
+              ><mat-icon>games</mat-icon
+              ><a href="https://github.com/pdkary/SpigotHueLightPlugin"
+                >Spigot Hue Light Plugin</a
+              ></u
+            >
+          </h3>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="text">
+          <p>
+            <b>Purpose:</b> A minecraft plugin, written in java, allowing the
+            user to operate real-world Philips Hue Light bulbs with in game
+            triggers
+          </p>
+          <p>
+            <b>Usage:</b> A player in minecraft may use a customized block to
+            assign levers/buttons/lanterns to connect with an exising Hue
+            Bridge, and can then operate lights with in game controls.
+          </p>
+          <p>
+            <b>Used Technology: </b>Java8, Maven, Lombok, FasterXml Jackson,
+            Spigot, Phillips Hue
+          </p>
+        </div>
+      </mat-card-content>
     </mat-card>
-  </mat-grid-tile>
-</mat-grid-list>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h3>
+            <u><mat-icon>emoji_objects</mat-icon>Love Lights</u>
+          </h3>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="text">
+          <p>
+            <b>Purpose:</b> A cute gift for a long distance relationship that
+            shows I care without needing to buy something expensive
+          </p>
+          <p>
+            <b>Usage:</b> Each partner keeps a jar at their respective location,
+            when the button is pushed, the lights in both jars changes color
+            along a color wheel synchronously.
+          </p>
+          <p>
+            <b>Used Technology: </b> ESP8266, ArduinoIDE, AdafruitIO, a little
+            bit of solder
+          </p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h3>
+            <u><mat-icon>emoji_people</mat-icon>Kinect Gesture Recognition</u>
+          </h3>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="text">
+          <p>
+            <b>Purpose:</b> Allow an xbox kinect v1 to trigger a request over an
+            http server when a preconfigured gesture is recognized
+          </p>
+          <p>
+            <b>Usage:</b> User defines gesture by entering "training" mode, and
+            standing in the gesture position for about 1 minute, then in various
+            other positions around the area for another 2 minutes. This data is
+            stored as "Skeletons", and tensorflow is used to develop a
+            categorization of "gesture" or "not gesture". When gesture is
+            triggered, an http request is sent.
+          </p>
+          <p><b>Used Technology: </b> C#, Kinect V1 SDK, Python3 tensorflow</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-expansion-panel>
+  <mat-expansion-panel class="mat-elevation-z1">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h1><u>Interests and Aspirations</u></h1>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-card>
+      <mat-card-title>
+          <h3>
+            <u><mat-icon>bug_report</mat-icon>NetSec/InfoSec</u>
+          </h3>
+        </mat-card-title>
+        <mat-card-content>
+        <div class="text">
+        <p>During the locked-in summer of 2020, I decided to try and teach myself network security / penetration testing. I began following small tutorials using a Kali Linux VM, and found myself wanting to expand my knowledge. I have since regularly competed on <a href="http://hackthebox.eu">HackTheBox</a>, and <a href="http://tryhackme.com">TryHackMe</a>. Recently, I have been exploring the world of bug bounties, when I have the chance. These experiences have taught me the basics of network reconnaissance and enumeration, bruteforcing (domains, subdomains, hashcracking, login),web app exploitation, priviledge escalation, and payload obfuscation. This knowledge, has given my an expanded perspective in the development of networked applications. </p>
+        <p><b>Familiar tools: </b> Nmap, gobuster, BurpSuite, netcat, hydra, hashcat, john the ripper, sqlmap, and a bit of google and elbow grease.</p>
+        </div>
+        </mat-card-content>
+    </mat-card>
+  </mat-expansion-panel>
+</mat-accordion>
