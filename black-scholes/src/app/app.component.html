@@ -16,7 +16,7 @@
       </mat-nav-list>
     </div>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content [style.height]="pageHeight">
     <button mat-icon-button color="primary" (click)="toggle_sidenav()">
       <mat-icon *ngIf="opened">chevron_left</mat-icon>
       <mat-icon *ngIf="!opened">chevron_right</mat-icon>

@@ -5,6 +5,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 body {
     background-color: #fafafa;
+    width: 100%;
+    height:100%;
 }
 .icon {
     margin-top:-1em;
@@ -12,9 +14,6 @@ body {
         width:10em;
         height:9em;
     }
-}
-mat-sidenav-container{
-    height:45em;
 }
 .vertical-divider{
     height: 95%;
