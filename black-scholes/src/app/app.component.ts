@@ -18,7 +18,7 @@ export class AppComponent {
     this.opened = true;
     this.matIconRegistry.addSvgIcon(
       'pingfloyd',
-      this.domSanitizer.bypassSecurityTrustResourceUrl("https://raw.githubusercontent.com/pdkary/pdkary.github.io/black-scholes/gh-pages/assets/pingfloydlogo.svg")
+      this.domSanitizer.bypassSecurityTrustResourceUrl("https://raw.githubusercontent.com/pdkary/pdkary.github.io/gh-pages/assets/pingfloydlogo.svg")
     );
     if(window.outerHeight > window.outerWidth){
       this.opened=false;
