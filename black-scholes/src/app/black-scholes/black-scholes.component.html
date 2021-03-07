@@ -1,8 +1,159 @@
 <div class="form-container">
   <form>
     <mat-grid-list cols="6" rowHeight="1em" gutterSize=".5em">
+      <mat-grid-tile colspan="5" rowspan="2" class="transparent">
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="2">
+        <button
+          mat-stroked-button
+          color="primary"
+          matTooltip="Open the description panel"
+          matTooltipPosition="above"
+          (click)="toggle_description_panel()"
+        >
+          <mat-icon>help_outline</mat-icon>
+          What am I looking at?
+        </button>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="6" rowspan="50" *ngIf="show_description_panel">
+        <mat-card class="mat-elevation-z8">
+          <div class="bs_desc">
+            <p>
+              The
+              <b
+                ><a
+                  href="https://en.wikipedia.org/wiki/Black%E2%80%93Scholes_model"
+                  >Black Scholes Model</a
+                ></b
+              >
+              is a crazy exciting differential equation that looks like this
+            </p>
+            <p>
+              <br />
+            </p>
+
+            <div class="equation">
+              <img
+                src="https://wikimedia.org/api/rest_v1/media/math/render/svg/d85601f6192ee85748c2deef28240275510d634e"
+              />
+            </div>
+            <p>
+              Thanks to some incredible work by some genius mathematicians, we
+              can estimate the value of put and call options, by solving this
+              initial and terminal boundary problem.
+            </p>
+            <div class="equation">
+              <img
+                src="https://wikimedia.org/api/rest_v1/media/math/render/svg/d1f576effba2c7cabdebb78ac63fbb75b850a714"
+              /><br /><br />
+              <img
+                src="https://wikimedia.org/api/rest_v1/media/math/render/svg/888c435dd73158c158a3217184eeed0675afb1f4"
+              />
+            </div>
+            <p>
+              Now these equations look complicated, (and they are!), however the
+              beauty of the work these matehematicians have done is that I can
+              tell my computer how to do it, and then forget about it. What a
+              magical time to be alive! All I need is a few pieces of
+              information about the option, and were off to the races. In the
+              equations above, the variables are as follows:
+            </p>
+            <ul>
+              <li>
+                <img
+                  src="https://wikimedia.org/api/rest_v1/media/math/render/svg/f684a5d524f20776dd9a95d95ac92e39d21e6a96"
+                />
+                The cumulative distribution function of the standard normal
+                distribution
+              </li>
+              <li>
+                <img
+                  src="https://wikimedia.org/api/rest_v1/media/math/render/svg/af0e151c64b128c60e883adf3106b9bdb01abae1"
+                />
+                Time until expiration date (in years)
+              </li>
+              <li>
+                <img
+                  src="https://wikimedia.org/api/rest_v1/media/math/render/svg/7e2391e6e796fbf718be3828080775ac2ac3d3d4"
+                />
+                Spot price of the underlying asset
+              </li>
+              <li>
+                <img
+                  src="https://wikimedia.org/api/rest_v1/media/math/render/svg/2b76fce82a62ed5461908f0dc8f037de4e3686b0"
+                />
+                Strike price of the option
+              </li>
+              <li>
+                <img
+                  src="https://wikimedia.org/api/rest_v1/media/math/render/svg/0d1ecb613aa2984f0576f70f86650b7c2a132538"
+                />
+                Risk free rate (for non econ-people this just google 'T-bill
+                rate right now')
+              </li>
+              <li>
+                <img
+                  src="https://wikimedia.org/api/rest_v1/media/math/render/svg/59f59b7c3e6fdb1d0365a494b81fb9a696138c36"
+                />
+                Volatility of the underlying asset
+              </li>
+            </ul>
+            <br />
+            <p>
+              These formulas also provide means of calculating partial
+              derivatives with repsect to other variables within the model.
+              These are known as the <b>Option Greeks</b>
+            </p>
+            <table>
+                <tr>
+                  <th>Name</th>
+                  <th>Definition</th>
+                  <th>Call Equation</th>
+                  <th>Put Equation</th>
+                </tr>
+              <tr>
+                <td>Delta</td>
+                <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/00a0565d85e69c498bbfbfb8cbe7033dcf33a741"/></td>
+                <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/d1cedc26e4285747fd3ad1f61d1570c2e393027d"/></td>
+                <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/257b3b5ec44d5a4b49fce42adba0144e8491d2e7"/></td>
+              </tr>
+              <tr>
+                <td>Gamma</td>
+                <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/b6a1d6f8e6a09a22b74227b3eca3c6a8e882938d"/></td>
+                <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/14cda38924fbd712ef6ee8ed12c0fca140e02a24"/></td>
+                <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/14cda38924fbd712ef6ee8ed12c0fca140e02a24"/></td>
+              </tr>
+              <tr>
+                <td>Theta</td>
+                <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/84ec8a638d6cac6a3feab4ce649bb09bb3e04c58"/></td>
+                <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/83a81a924dbdfd3b35fc2600694e54328e88ce01"/></td>
+                <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9f9dc128049b5764091b4ef89476f702c2f5ce2d"/></td>
+              </tr>
+              <tr>
+                <td>Vega</td>
+                <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/30570566548b88333352784b6152e7a3afa34896"/></td>
+                <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/1f8e9ebef50ddfbd628045cf74ea31dbdd0b4d9f"/></td>
+                <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9f9dc128049b5764091b4ef89476f702c2f5ce2d"/></td>
+              </tr>
+            </table>
+            <p>
+              <b>
+                This website, is essentially a big ol Black-Scholes Calculator.
+                You supply the stock tickers, a range of expiration dates, and
+                an idea of the strike prices, and the calculator pulls stock
+                data from yahoo finance, and performs BSM calculations over a
+                large vector of option data.
+              </b>
+            </p>
+          </div>
+        </mat-card>
+      </mat-grid-tile>
       <mat-grid-tile colspan="6" rowspan="4">
-        <mat-form-field appearance="outline">
+        <mat-form-field
+          matTooltip="Add tickers for the options you want to search"
+          matTooltipPosition="above"
+          appearance="outline"
+        >
           <mat-label>Add Ticker</mat-label>
           <input
             matInput
@@ -31,7 +182,11 @@
         </mat-chip-list>
       </mat-grid-tile>
       <mat-grid-tile rowspan="3" [colspan]="isMobile ? 3 : 1">
-        <mat-form-field appearance="outline">
+        <mat-form-field
+          appearance="outline"
+          matTooltip="Search for strike prices equal to spot, or shift by a fixed or relative amount"
+          matTooltipPosition="above"
+        >
           <mat-label>Search Mode</mat-label>
           <mat-select [(value)]="mode">
             <mat-option>None</mat-option>
@@ -54,7 +209,12 @@
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile rowspan="3" [colspan]="isMobile ? 6 : 2">
-        <mat-form-field appearance="outline" class="datepicker">
+        <mat-form-field
+          appearance="outline"
+          class="datepicker"
+          matTooltip="The range of expiration dates for these options"
+          matTooltipPosition="above"
+        >
           <mat-label>Expiration Date Range</mat-label>
           <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
             <input
@@ -79,14 +239,26 @@
           >
         </mat-form-field>
       </mat-grid-tile>
-      <mat-grid-tile rowspan="3" [colspan]="isMobile?6:2">
-        <button mat-stroked-button color="primary" (click)="pull_data()">
+      <mat-grid-tile rowspan="3" [colspan]="isMobile ? 6 : 2">
+        <button
+          mat-stroked-button
+          color="primary"
+          (click)="pull_data()"
+          matTooltip="GO GO GO GO GO!"
+          matTooltipPosition="above"
+        >
           <mat-icon>search</mat-icon>
           Search Options
         </button>
       </mat-grid-tile>
       <mat-grid-tile rowspan="2" [colspan]="isMobile ? 6 : 1">
-        <button mat-stroked-button color="primary" (click)="toggle_column_editor()">
+        <button
+          mat-stroked-button
+          color="primary"
+          (click)="toggle_column_editor()"
+          matTooltip="Change the columns in the output table"
+          matTooltipPosition="above"
+        >
           <mat-icon>settings</mat-icon>
           Adjust Columns
         </button>
@@ -100,13 +272,20 @@
           <ng-container *ngFor="let column of displayedColumns; let i = index">
             <mat-checkbox
               (change)="toggle_column(i, $event)"
-              [checked]="columnsToDisplay.includes(displayedColumns[i])?true:false"
+              [checked]="
+                columnsToDisplay.includes(displayedColumns[i]) ? true : false
+              "
               >{{ displayedColumns[i] }}
             </mat-checkbox>
           </ng-container>
         </div>
       </mat-grid-tile>
-      <mat-grid-tile colspan="6" rowspan="2">
+      <mat-grid-tile
+        colspan="6"
+        rowspan="2"
+        matTooltip="Table of Call Options"
+        matTooltipPosition="above"
+      >
         <h1>CALLS</h1>
       </mat-grid-tile>
       <mat-grid-tile colspan="6" [rowspan]="call_table_rows">
@@ -141,7 +320,12 @@
           [style.visibility]="bsmElements.length > 0 ? 'visible' : 'hidden'"
         ></mat-paginator>
       </mat-grid-tile>
-      <mat-grid-tile colspan="6" rowspan="2">
+      <mat-grid-tile
+        colspan="6"
+        rowspan="2"
+        matTooltip="Table of Put Options"
+        matTooltipPosition="above"
+      >
         <h1>PUTS</h1>
       </mat-grid-tile>
       <mat-grid-tile colspan="6" [rowspan]="put_table_rows">

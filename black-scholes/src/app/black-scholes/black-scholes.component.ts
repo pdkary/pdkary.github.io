@@ -48,6 +48,7 @@ export class BlackScholesComponent implements AfterViewInit {
   tickerCtrl = new FormControl();
   isMobile: boolean = false;
   show_column_editor:boolean = false;
+  show_description_panel:boolean = false;
 
   tickers: string[] = ['AAPL'];
   start_date: Moment | string;
@@ -212,5 +213,9 @@ export class BlackScholesComponent implements AfterViewInit {
         this.columnsToDisplay.splice(idx,1);
       }
     }
+  }
+  toggle_description_panel(){
+    console.log(this.show_description_panel);
+    this.show_description_panel = !this.show_description_panel;
   }
 }

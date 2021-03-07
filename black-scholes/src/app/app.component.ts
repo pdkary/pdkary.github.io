@@ -25,7 +25,7 @@ export class AppComponent {
     if(window.outerHeight > window.outerWidth){
       this.opened=false;
       this.isMobile=true;
-      this.pageHeight = "100em";
+      this.pageHeight = "300em";
     }
   }
   toggle_sidenav(){
