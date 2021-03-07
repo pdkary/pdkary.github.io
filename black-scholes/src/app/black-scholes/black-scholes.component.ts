@@ -122,13 +122,21 @@ export class BlackScholesComponent implements AfterViewInit {
     if ((value || '').trim()) {
       const val = value.trim().toUpperCase();
       if (!this.tickers.includes(val)) {
-        this.tickers.push(value.trim().toUpperCase());
-        this.expr_map.set(value, []);
+        this.tickers.push(val);
+        this.expr_map.set(val, []);
       }
     }
     // Reset the input value
     if (input) {
       input.value = '';
+    }
+  }
+
+  add_by_string(tkr:string):void{
+    const val = tkr.toUpperCase();
+    if(!this.tickers.includes(val)){
+      this.tickers.push(val);
+      this.expr_map.set(val,[]);
     }
   }
 
