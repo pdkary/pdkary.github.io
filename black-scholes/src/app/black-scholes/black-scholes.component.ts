@@ -8,6 +8,7 @@ import { Moment } from 'moment';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface BsmElement {
   symbol: string;
@@ -93,7 +94,7 @@ export class BlackScholesComponent implements AfterViewInit {
     end: new FormControl()
   });
 
-  constructor(private bsmDataService: BsmDataService) {
+  constructor(private bsmDataService: BsmDataService, private snackBar: MatSnackBar) {
     this.start_date = "";
     this.end_date = "";
     this.expr_map = new Map<String, Array<String>>();
@@ -137,6 +138,24 @@ export class BlackScholesComponent implements AfterViewInit {
       this.tickers.splice(index, 1);
     }
   }
+  openSnackBar(len:Number){
+    if(len>0){
+      let responseStr: string = "Query returned " + len.toString() + " options";
+      this.snackBar.open(responseStr,"",{
+        duration:3000,
+        panelClass:"happy_snackbar",
+        horizontalPosition:"right",
+        verticalPosition:"top"
+      });
+    }else{
+      this.snackBar.open("No Options Found!","",{
+        duration:3000,
+        panelClass:"sad_snackbar",
+        horizontalPosition:"right",
+        verticalPosition:"top"
+      });
+    }
+  }
 
   pull_data(): void {
     console.log(this.tickers);
@@ -148,6 +167,7 @@ export class BlackScholesComponent implements AfterViewInit {
       if(this.mode==0){
         this.bsmDataService.get_atm_multi_expr(undefined, date_range).subscribe(x=> {
           let arr = (x as Array<any>);
+          this.openSnackBar(arr.length);
           arr.forEach(x => this.bsmElements.push(this.convert_row_to_bsm_element(x)));
           this.callDataSource = new MatTableDataSource<BsmElement>(this.bsmElements.filter((ele: BsmElement)=>ele.type=="CALL"));
           this.putDataSource = new MatTableDataSource<BsmElement>(this.bsmElements.filter((ele: BsmElement)=>ele.type=="PUT"));
@@ -160,6 +180,7 @@ export class BlackScholesComponent implements AfterViewInit {
         console.log(this.shiftInput);
         this.bsmDataService.get_atm_shift_abs_multi_expr(+this.shiftInput,undefined, date_range).subscribe(x=> {
           let arr = (x as Array<any>);
+          this.openSnackBar(arr.length);
           arr.forEach(x => this.bsmElements.push(this.convert_row_to_bsm_element(x)));
           this.callDataSource = new MatTableDataSource<BsmElement>(this.bsmElements.filter((ele: BsmElement)=>ele.type=="CALL"));
           this.putDataSource = new MatTableDataSource<BsmElement>(this.bsmElements.filter((ele: BsmElement)=>ele.type=="PUT"));
@@ -172,6 +193,7 @@ export class BlackScholesComponent implements AfterViewInit {
         console.log(this.shiftInput);
         this.bsmDataService.get_atm_shift_rel_multi_expr(+this.shiftInput,undefined, date_range).subscribe(x=> {
           let arr = (x as Array<any>);
+          this.openSnackBar(arr.length);
           arr.forEach(x => this.bsmElements.push(this.convert_row_to_bsm_element(x)));
           this.callDataSource = new MatTableDataSource<BsmElement>(this.bsmElements.filter((ele: BsmElement)=>ele.type=="CALL"));
           this.putDataSource = new MatTableDataSource<BsmElement>(this.bsmElements.filter((ele: BsmElement)=>ele.type=="PUT"));

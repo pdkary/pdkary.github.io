@@ -77,3 +77,10 @@
         }
     }
 }
+
+::ng-deep .happy_snackbar {
+    background-color: #1Dbc60 !important;
+}
+::ng-deep .sad_snackbar {
+    background-color: #ef3d59 !important;
+}
