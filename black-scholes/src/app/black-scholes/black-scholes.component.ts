@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild, OnInit, OnChanges, AfterViewInit, HostListener } from '@angular/core';
 import { BsmDataService } from '../bsm-data.service';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { COMMA, ENTER,SPACE } from '@angular/cdk/keycodes';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
 import { Observable } from 'rxjs';
@@ -41,7 +41,7 @@ export class BlackScholesComponent implements AfterViewInit {
   visible = true;
   selectable = true;
   removable = true;
-  separatorKeysCodes: number[] = [ENTER, COMMA];
+  separatorKeysCodes: number[] = [ENTER, COMMA, SPACE];
   displayedColumns: string[]  = ["symbol", "expiration", "spot", "strike", "BSM_Value", "last", "bid", "ask", "breakeven", "openInterest", "delta", "gamma", "theta", "IV", "vol"];
   mobileColumns: string[] = ["symbol", "spot", "strike", "BSM_Value", "last"];
   columnsToDisplay: string[] = this.displayedColumns.slice();

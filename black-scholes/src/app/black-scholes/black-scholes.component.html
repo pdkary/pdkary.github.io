@@ -1,9 +1,9 @@
 <div class="form-container">
   <form>
     <mat-grid-list cols="6" rowHeight="1em" gutterSize=".5em">
-      <mat-grid-tile colspan="5" rowspan="2" class="transparent">
+      <mat-grid-tile [colspan]="isMobile?2:5" rowspan="2" class="transparent">
       </mat-grid-tile>
-      <mat-grid-tile colspan="1" rowspan="2">
+      <mat-grid-tile [colspan]="isMobile?4:1" rowspan="2">
         <button
           mat-stroked-button
           color="primary"
@@ -15,9 +15,8 @@
           What am I looking at?
         </button>
       </mat-grid-tile>
-      <mat-grid-tile colspan="6" rowspan="50" *ngIf="show_description_panel">
-        <mat-card class="mat-elevation-z8">
-          <div class="bs_desc">
+      <mat-grid-tile colspan="6" [rowspan]="isMobile?50:55" *ngIf="show_description_panel">
+        <mat-card class="mat-elevation-z8 bs_desc">
             <p>
               The
               <b
@@ -28,10 +27,6 @@
               >
               is a crazy exciting differential equation that looks like this
             </p>
-            <p>
-              <br />
-            </p>
-
             <div class="equation">
               <img
                 src="https://wikimedia.org/api/rest_v1/media/math/render/svg/d85601f6192ee85748c2deef28240275510d634e"
@@ -104,7 +99,7 @@
               derivatives with repsect to other variables within the model.
               These are known as the <b>Option Greeks</b>
             </p>
-            <table>
+            <table *ngIf="!isMobile">
                 <tr>
                   <th>Name</th>
                   <th>Definition</th>
@@ -113,27 +108,27 @@
                 </tr>
               <tr>
                 <td>Delta</td>
-                <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/00a0565d85e69c498bbfbfb8cbe7033dcf33a741"/></td>
+                <td><img class="deriv" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/00a0565d85e69c498bbfbfb8cbe7033dcf33a741"/></td>
                 <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/d1cedc26e4285747fd3ad1f61d1570c2e393027d"/></td>
-                <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/257b3b5ec44d5a4b49fce42adba0144e8491d2e7"/></td>
+                <td><img class="bigger" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/257b3b5ec44d5a4b49fce42adba0144e8491d2e7"/></td>
               </tr>
               <tr>
                 <td>Gamma</td>
-                <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/b6a1d6f8e6a09a22b74227b3eca3c6a8e882938d"/></td>
+                <td><img class="deriv" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/b6a1d6f8e6a09a22b74227b3eca3c6a8e882938d"/></td>
                 <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/14cda38924fbd712ef6ee8ed12c0fca140e02a24"/></td>
                 <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/14cda38924fbd712ef6ee8ed12c0fca140e02a24"/></td>
               </tr>
               <tr>
                 <td>Theta</td>
-                <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/84ec8a638d6cac6a3feab4ce649bb09bb3e04c58"/></td>
-                <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/83a81a924dbdfd3b35fc2600694e54328e88ce01"/></td>
-                <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9f9dc128049b5764091b4ef89476f702c2f5ce2d"/></td>
+                <td><img class="deriv" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/84ec8a638d6cac6a3feab4ce649bb09bb3e04c58"/></td>
+                <td><img class="bigger" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/83a81a924dbdfd3b35fc2600694e54328e88ce01"/></td>
+                <td><img class="bigger" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9f9dc128049b5764091b4ef89476f702c2f5ce2d"/></td>
               </tr>
               <tr>
                 <td>Vega</td>
-                <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/30570566548b88333352784b6152e7a3afa34896"/></td>
-                <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/1f8e9ebef50ddfbd628045cf74ea31dbdd0b4d9f"/></td>
-                <td><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9f9dc128049b5764091b4ef89476f702c2f5ce2d"/></td>
+                <td><img class="deriv" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/30570566548b88333352784b6152e7a3afa34896"/></td>
+                <td><img class="bigger" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/1f8e9ebef50ddfbd628045cf74ea31dbdd0b4d9f"/></td>
+                <td><img class="bigger" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9f9dc128049b5764091b4ef89476f702c2f5ce2d"/></td>
               </tr>
             </table>
             <p>
@@ -145,7 +140,6 @@
                 large vector of option data.
               </b>
             </p>
-          </div>
         </mat-card>
       </mat-grid-tile>
       <mat-grid-tile colspan="6" rowspan="4">
