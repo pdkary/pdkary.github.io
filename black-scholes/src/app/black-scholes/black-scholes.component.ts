@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild, OnInit, OnChanges, AfterViewInit, HostListener } from '@angular/core';
 import { BsmDataService } from '../bsm-data.service';
 import { COMMA, ENTER,SPACE } from '@angular/cdk/keycodes';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
 import { Observable } from 'rxjs';
 import { Moment } from 'moment';
@@ -46,7 +46,7 @@ export class BlackScholesComponent implements AfterViewInit {
   displayedColumns: string[]  = ["symbol", "expiration", "spot", "strike", "BSM_Value", "last", "bid", "ask", "breakeven", "openInterest", "delta", "gamma", "theta", "IV", "vol"];
   mobileColumns: string[] = ["symbol", "spot", "strike", "BSM_Value", "last"];
   columnsToDisplay: string[] = this.displayedColumns.slice();
-  tickerCtrl = new FormControl();
+  tickerCtrl = new UntypedFormControl();
   isMobile: boolean = false;
   show_column_editor:boolean = false;
   show_description_panel:boolean = false;
@@ -89,9 +89,9 @@ export class BlackScholesComponent implements AfterViewInit {
     console.log(this.isMobile);
   }
 
-  range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl()
+  range = new UntypedFormGroup({
+    start: new UntypedFormControl(),
+    end: new UntypedFormControl()
   });
 
   constructor(private bsmDataService: BsmDataService, private snackBar: MatSnackBar) {
