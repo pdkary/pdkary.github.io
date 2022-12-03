@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { filter } from 'rxjs/operators';
 
 import { Router, NavigationEnd, Event as NavigationEvent } from '@angular/router';
 

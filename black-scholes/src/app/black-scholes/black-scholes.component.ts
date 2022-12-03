@@ -2,13 +2,13 @@ import { Component, ElementRef, ViewChild, OnInit, OnChanges, AfterViewInit, Hos
 import { BsmDataService } from '../bsm-data.service';
 import { COMMA, ENTER,SPACE } from '@angular/cdk/keycodes';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
+import { MatLegacyChipInputEvent as MatChipInputEvent, MatLegacyChipList as MatChipList } from '@angular/material/legacy-chips';
 import { Observable } from 'rxjs';
 import { Moment } from 'moment';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatCheckboxChange } from '@angular/material/checkbox';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacyTable as MatTable, MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
+import { MatLegacyPaginator as MatPaginator, LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
+import { MatLegacyCheckboxChange as MatCheckboxChange } from '@angular/material/legacy-checkbox';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 
 export interface BsmElement {
   symbol: string;

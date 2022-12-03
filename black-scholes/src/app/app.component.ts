@@ -1,7 +1,4 @@
-import { stringify } from '@angular/compiler/src/util';
 import { Component } from '@angular/core';
-import { MatIconRegistry } from "@angular/material/icon";
-import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-root',
@@ -9,19 +6,12 @@ import { DomSanitizer } from "@angular/platform-browser";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'black-scholes';
+  title = 'Parker Kary';
   opened: boolean;
   isMobile=false;
   pageHeight: string = "55em";
-  constructor(
-    private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
-  ) {
+  constructor() {
     this.opened = true;
-    this.matIconRegistry.addSvgIcon(
-      'pingfloyd',
-      this.domSanitizer.bypassSecurityTrustResourceUrl("https://raw.githubusercontent.com/pdkary/pdkary.github.io/gh-pages/assets/pingfloydlogo.svg")
-    );
     if(window.outerHeight > window.outerWidth){
       this.opened=false;
       this.isMobile=true;
