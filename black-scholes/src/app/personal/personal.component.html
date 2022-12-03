@@ -1,0 +1,226 @@
+<mat-grid-list cols="12" rowHeight="1em" gutterSize=".4em" class="container">
+  <mat-grid-tile rowspan="2" colspan="12">
+    <h1>Parker Kary</h1>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="isMobile?12:2" rowspan="11">
+    <div class="headshot">
+      <img src="../assets/me.jpg" height="250em" width="250em" />
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="isMobile?12:10" rowspan="2">
+    <h1><u>About Me</u></h1>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="isMobile?12:8" [rowspan]="isMobile?20:11">
+    <div class="text">
+      <p>
+        McMaster Mechatronics Engineering and Management Student, graduating in
+        December 2021. Always looking for a new project to get excited about. I
+        am passionate, hard working student, constantly seeking new projects, and developing
+        new skills along the way. I am an active learner,
+        regularly teaching myself new skills, frameworks, libraries, tools, etc,
+        to help expand the projects I have worked on.
+      </p>
+      <p>
+        My personal project experience has led me to develop skills, and expand
+        into areas outside my education, such as computer vision, IOT
+        development, web design (Angular), economics, robotics, automation, and
+        many others.
+      </p>
+      <p>
+        In my opinion, the most valuable skill I have learned, is the process of
+        <b>integrating</b> of various components.
+      </p>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+<mat-accordion>
+  <mat-expansion-panel
+    class="mat-elevation-z1">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h2><u>Project Overview</u></h2>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h3>
+            <u
+              ><mat-icon>local_atm</mat-icon
+              ><a href="https://github.com/pdkary/black-scholes-plus"
+                >Black Scholes Plus</a
+              ></u
+            >
+          </h3>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="text">
+          <p>
+            <b>Purpose:</b> Estimate the value of stock options for given
+            stocks, at a desired expiration date and strike price.
+          </p>
+          <p>
+            <b>Usage:</b> User inputs the stock tickers they are interested in,
+            as well as expiration dates <b>(</b>one for all tickers / one for
+            each ticker / range<b>)</b> and strike prices <b>(</b>at the money /
+            above by x units / above by x percent<b>)</b>.
+            <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The
+            script then gathers all options that match these criteria, and
+            performa Black Scholes calculations, and data is returned in a
+            pandas DataFrame.
+          </p>
+          <p>
+            <b>Used Technology: </b> Angular11, Python3, numpy, pandas, scipy,
+            yahoofinance, flask,
+          </p>
+          <p><b> Check out the Black-Scholes tab for a demo! </b></p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h3>
+            <u
+              ><mat-icon>games</mat-icon
+              ><a href="https://github.com/pdkary/SpigotHueLightPlugin"
+                >Spigot Hue Light Plugin</a
+              ></u
+            >
+          </h3>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="text">
+          <p>
+            <b>Purpose:</b> A minecraft plugin, written in java, allowing the
+            user to operate real-world Philips Hue Light bulbs with in game
+            triggers
+          </p>
+          <p>
+            <b>Usage:</b> A player in minecraft may use a customized block to
+            assign levers/buttons/lanterns to connect with an exising Hue
+            Bridge, and can then operate lights with in game controls.
+          </p>
+          <p>
+            <b>Used Technology: </b>Java8, Maven, Lombok, FasterXml Jackson,
+            Spigot, Phillips Hue
+          </p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h3>
+            <u><mat-icon>emoji_objects</mat-icon>Love Lights</u>
+          </h3>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="text">
+          <p>
+            <b>Purpose:</b> A cute gift for a long distance relationship that
+            shows I care without needing to buy something expensive
+          </p>
+          <p>
+            <b>Usage:</b> Each partner keeps a jar at their respective location,
+            when the button is pushed, the lights in both jars changes color
+            along a color wheel synchronously.
+          </p>
+          <p>
+            <b>Used Technology: </b> ESP8266, ArduinoIDE, AdafruitIO, a little
+            bit of solder
+          </p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h3>
+            <u><mat-icon>emoji_people</mat-icon>Kinect Gesture Recognition</u>
+          </h3>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="text">
+          <p>
+            <b>Purpose:</b> Allow an xbox kinect v1 to trigger a request over an
+            http server when a preconfigured gesture is recognized
+          </p>
+          <p>
+            <b>Usage:</b> User defines gesture by entering "training" mode, and
+            standing in the gesture position for about 1 minute, then in various
+            other positions around the area for another 2 minutes. This data is
+            stored as "Skeletons", and tensorflow is used to develop a
+            categorization of "gesture" or "not gesture". When gesture is
+            triggered, an http request is sent.
+          </p>
+          <p><b>Used Technology: </b> C#, Kinect V1 SDK, Python3 tensorflow</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-expansion-panel>
+  <mat-expansion-panel class="mat-elevation-z1">
+    <mat-expansion-panel-header>
+      <mat-panel-title *ngIf="!isMobile">
+        <h2><u>Interests and Aspirations</u></h2>
+      </mat-panel-title>
+      <mat-panel-title *ngIf="isMobile">
+        <h2><u>Interests</u></h2>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-card>
+      <mat-card-title>
+          <h3>
+            <u><mat-icon>bug_report</mat-icon>NetSec/InfoSec</u>
+          </h3>
+        </mat-card-title>
+        <mat-card-content>
+        <div class="text">
+        <p>During the locked-in summer of 2020, I decided to try and teach myself network security / penetration testing. I began following small tutorials using a Kali Linux VM, and found myself wanting to expand my knowledge. I have since regularly competed on <a href="http://hackthebox.eu">HackTheBox</a>, and <a href="http://tryhackme.com">TryHackMe</a>. Recently, I have been exploring the world of bug bounties, when I have the chance. These experiences have taught me the basics of network reconnaissance and enumeration, bruteforcing (domains, subdomains, hashcracking, login),web app exploitation, priviledge escalation, and payload obfuscation. This knowledge, has given my an expanded perspective in the development of networked applications. </p>
+        <p><b>Familiar tools: </b> Nmap, gobuster, BurpSuite, netcat, hydra, hashcat, john the ripper, sqlmap, and a bit of google and elbow grease.</p>
+        </div>
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-title>
+          <h3>
+            <u><mat-icon>account_balance</mat-icon>FinTech / Economics</u>
+          </h3>
+        </mat-card-title>
+        <mat-card-content>
+        <div class="text">
+          <p>The field of economics excites me because of its ability to measure human behaviour, with quantitiative results. I have personally enjoyed some or the works of Richard Thaler, such as "Misbehaving" or "Nudge", which focus on the many situations in which we as humans act irrationally. FinTech offers the ability to combine the power of big data analysis, with the massive complexity of financial markets. Though this is not new news, the field of FinTech is still growing quickly, and ready to be revolutionized by modern intelligent systems. While my work is not quite at an AI level (yet..), I have begun to explore the field with the development of smaller tools, and calculators to aid in decision making.</p>
+        </div>
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-title>
+          <h3>
+            <u><mat-icon>router</mat-icon>Internet of Things</u>
+          </h3>
+        </mat-card-title>
+        <mat-card-content>
+        <div class="text">
+          <p> The ESP8266 chip has a special place in my heart. A chip so cheap and with so many available libraries and codebases, the possibilities are endless. I have used ESP8266 chips in many projects, including the "Love Lights" mentioned above, but also for small automation projects like a wifi-enabled IR blaster for TV and stereo automation, a customizeable button array for triggering webhooks, an automated dog feeder, and even a small camera pan and tilt mount. The possibilities of internet of things development is vast and readily changing, with uses varying from a decentralized internet, to retrofitting factory equipment with cheap, and interconnectable sensors. IOT may just build the future, and Im excited to watch it happen.
+        </div>
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-title>
+          <h3>
+            <u><mat-icon>precision_manufacturing</mat-icon>Robotics and Prosthetics</u>
+          </h3>
+        </mat-card-title>
+        <mat-card-content>
+        <div class="text">
+          <p>Though my experience with robotics has been limited to small servo robots, RC cars, and drones, I have maintained a deep interet in robotics, and more specifically in prosthetics. Quality prosthetics today are either overly expensive, or simply unavailable (even moreso to those in 3rd world countries or marginalized communities). The rise of 3d printed prosthetics has me excited about the future of the industry, but I believe there is still much that can be improved, and I would be excited to help</p> 
+        </div>
+        </mat-card-content>
+    </mat-card>
+  </mat-expansion-panel>
+</mat-accordion>
