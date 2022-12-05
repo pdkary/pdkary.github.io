@@ -1972,7 +1972,6 @@ class RubixComponent {
       }
     }
     this.drawTable();
-    console.log("-------------------------------------------------------------------------------");
   }
   drawTable() {
     var t = 0;
