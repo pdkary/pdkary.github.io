@@ -149,21 +149,19 @@
           appearance="outline"
         >
           <mat-label>Add Ticker</mat-label>
-          <input
-            matInput
-            placeholder="GOOG"
+          <!-- TODO: BROKEN-->
+          <!-- <input placeholder="GOOG"
             #tickerInput
             [matChipInputFor]="chipList"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            (matChipInputTokenEnd)="add($event)"
-          />
+            (matChipInputTokenEnd)="add($event)"/> -->
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile colspan="2" rowspan="4" *ngIf="isMobile">
-      <button mat-stroked-button class="lil_bit_smaller" color="primary" (click)="add_by_string(tickerInput.value)">
+      <!-- <button mat-stroked-button class="lil_bit_smaller" color="primary" (click)="add_by_string(tickerInput.value)">
         <mat-icon>add</mat-icon>
         Add
-      </button>
+      </button> -->
       </mat-grid-tile>
       <mat-grid-tile
         [rowspan]="isMobile ? tickers.length / 3 + 3 : 2"

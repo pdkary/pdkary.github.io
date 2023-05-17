@@ -1,14 +1,13 @@
 import { Component, ElementRef, ViewChild, OnInit, OnChanges, AfterViewInit, HostListener } from '@angular/core';
 import { BsmDataService } from '../bsm-data.service';
 import { COMMA, ENTER,SPACE } from '@angular/cdk/keycodes';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { MatLegacyChipInputEvent as MatChipInputEvent, MatLegacyChipList as MatChipList } from '@angular/material/legacy-chips';
-import { Observable } from 'rxjs';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MatChipInputEvent } from '@angular/material/chips';
 import { Moment } from 'moment';
-import { MatLegacyTable as MatTable, MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
-import { MatLegacyPaginator as MatPaginator, LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
-import { MatLegacyCheckboxChange as MatCheckboxChange } from '@angular/material/legacy-checkbox';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface BsmElement {
   symbol: string;
@@ -46,7 +45,7 @@ export class BlackScholesComponent implements AfterViewInit {
   displayedColumns: string[]  = ["symbol", "expiration", "spot", "strike", "BSM_Value", "last", "bid", "ask", "breakeven", "openInterest", "delta", "gamma", "theta", "IV", "vol"];
   mobileColumns: string[] = ["symbol", "spot", "strike", "BSM_Value", "last"];
   columnsToDisplay: string[] = this.displayedColumns.slice();
-  tickerCtrl = new UntypedFormControl();
+  tickerCtrl = new FormControl();
   isMobile: boolean = false;
   show_column_editor:boolean = false;
   show_description_panel:boolean = false;
@@ -89,9 +88,9 @@ export class BlackScholesComponent implements AfterViewInit {
     console.log(this.isMobile);
   }
 
-  range = new UntypedFormGroup({
-    start: new UntypedFormControl(),
-    end: new UntypedFormControl()
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
   });
 
   constructor(private bsmDataService: BsmDataService, private snackBar: MatSnackBar) {

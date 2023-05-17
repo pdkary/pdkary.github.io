@@ -1,0 +1,31 @@
+.main-container {
+    .canvas-container {
+        margin-left: -5em;
+        margin-top: -1em;
+        canvas {
+            // border: 4px solid #333333;
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+    }
+
+    .button-0-container {
+        float:left;
+    }
+    .button-1-container {
+        float:right;
+    }
+    .button-2-container {
+        width:100%;
+        div {
+            width:12em;
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+}

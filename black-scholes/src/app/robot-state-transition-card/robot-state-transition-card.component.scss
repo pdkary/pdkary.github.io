@@ -1,0 +1,37 @@
+
+
+.card-container {
+    // width: fit-content;
+    display:flex;
+    
+    .toggle-container {
+        padding-top: 0.5em;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+
+        .remove-button {
+            float: right;
+            width: 2.2em;
+            height: 2.2em;
+        }
+    }
+    .robot-container{
+        padding: 0.5em;
+        display:inline-flex;
+        .wildcard-button {
+            margin-left: -1em;
+            margin-top: -0.5em;
+            height: fit-content;
+            width: fit-content;
+            opacity: 0.5;
+            transform: scale(0.75);
+        }
+        .terminal-button {
+            margin-left: -0.5em;
+            margin-top: -0.5em;
+            height: fit-content;
+            width: fit-content;
+            transform: scale(0.75);
+        }
+    }
+}

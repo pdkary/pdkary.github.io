@@ -1,0 +1,69 @@
+
+<div class="card-container" [style.width]="5*robotSize - 3 + 'em'">
+    <mat-card class="mat-elevation-z8">
+        <div class="toggle-container" *ngIf="interactive">
+            <mat-slide-toggle [(ngModel)]="active" (change)="onActiveChanged()">
+                {{active ? 'Active' : 'Disabled'}}
+            </mat-slide-toggle>
+            <button mat-mini-fab color="accent" class="remove-button" (click)="onRemoveClicked()">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+        <div class="robot-container" >
+            <lil-robot 
+                [size]="robotSize" 
+                [initialState]="leftState"
+                [isWildCard]="leftState.matchAny"
+                [isEdge]="leftState.isEdge"
+                (onChange)="onLeftChange($event)"
+            ></lil-robot>
+            <span *ngIf="interactive">
+                <div class="wildcard-button" (click)="onLeftWildcardClicked()">
+                    <mat-icon>question_mark</mat-icon>
+                </div>
+                <div class="terminal-button" (click)="onLeftTerminalClicked()">
+                    <mat-icon>border_left</mat-icon>
+                </div>
+            </span>
+            <lil-robot 
+                [size]="robotSize" 
+                [initialState]="selfState"
+                [isWildCard]="selfState.matchAny"
+                [isEdge]="selfState.isEdge"
+                (onChange)="onSelfChange($event)"
+            ></lil-robot>
+            <span *ngIf="interactive">
+                <div class="wildcard-button" (click)="onSelfWildcardClicked()">
+                    <mat-icon>question_mark</mat-icon>
+                </div>
+            </span>
+            <lil-robot 
+                [size]="robotSize" 
+                [initialState]="rightState"
+                [isWildCard]="rightState.matchAny"
+                [isEdge]="rightState.isEdge"
+                (onChange)="onRightChange($event)"
+            ></lil-robot>
+            <span *ngIf="interactive">
+                <div class="wildcard-button" (click)="onRightWildcardClicked()">
+                    <mat-icon>question_mark</mat-icon>
+                </div>
+                <div class="terminal-button" (click)="onRightTerminalClicked()">
+                    <mat-icon>border_right</mat-icon>
+                </div>
+            </span>
+            <div class="arrow-container" 
+                [style.padding-top]="(robotSize-2)/2 +  'em'" 
+                [style.padding-left]="robotSize/8 +  'em'" 
+                [style.padding-right]="(robotSize-2)/8 +  'em'" 
+                [style.transform]="'scale(' + robotSize/4 +')'">
+                <mat-icon fontIcon="arrow_forward"></mat-icon>
+            </div>
+            <lil-robot 
+                [size]="robotSize" 
+                [initialState]="nextState"
+                (onChange)="onNextChange($event)"
+            ></lil-robot>
+        </div>
+    </mat-card>
+</div>
