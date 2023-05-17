@@ -1,0 +1,89 @@
+mat-card {
+    width: fit-content;
+    margin-top: 1em;
+}
+
+.main-container {
+    display: flex;
+    padding: 1em;
+    .graph-container {
+        margin: auto;
+    }
+    .menu-container {
+        width: fill;
+        min-width: 15em;
+        max-width: 35em;
+
+        h3 {
+            width: 20%;
+            margin-top:-0.5em;
+            margin-bottom:-0.5em;
+            display: inline-block;
+        }
+        .function-input-card {
+            margin: 1em;
+            padding: 1em;
+            width: fill;
+            .function-input {
+                display: flex;
+                .color-picker-container {
+                    padding: 1em;
+                    width: 2em;
+                    margin-left: -1em;
+                    input {
+                        cursor: pointer;
+                        border-radius: 100%;
+                        width: fill;
+                        height: fill;
+                    }
+                }
+                mat-form-field {
+                    width: 70%;
+                    margin-bottom:-1em;
+                }
+                .remove-button, .invert-button {
+                    *{
+                        transform: scale(0.75);
+                    }
+                    // padding-left: 5%;
+                    width: 10%;
+                    border-radius: 0em;
+                    height:fill;
+                }
+            }
+            
+            .function-header {
+                button { 
+                    margin-top: -0.5em;
+                    float: right;
+                }
+            }
+        }
+        .controls {
+            margin: 1em;
+            padding: 0.5em;
+            width: fill;
+            
+            
+            .xrange-container {
+                mat-form-field {
+                    width: 45%;
+                    padding: 2.5%;
+                }
+            }
+            .slider-container {
+                margin-top:-0.5em;
+                // background-color: rgba(238, 118, 238, 0.568);
+                mat-slider {
+                    margin-top: -2em;
+                    width: fill;
+                }
+            }
+            .checkbox-container {
+                mat-checkbox {
+                    width: 40%;
+                }
+            }
+        }
+    }
+}

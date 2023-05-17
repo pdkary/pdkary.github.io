@@ -1,0 +1,30 @@
+.robot-control-container {
+    margin-top: 3em;
+    width: fill;
+    button {
+        margin-left: 1em;
+    }
+}
+
+.robot-playground {
+    display:inline-flex;
+    margin-top: 1em;
+}
+
+.button-container {
+    margin-top: 1em;
+    width: fill;
+    button {
+        margin-left: 1em;
+    }
+}
+
+.transition-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0.2em;
+    robot-state-transition-card {
+        margin-left: 3em;
+        padding: 0.2em;
+    }
+}

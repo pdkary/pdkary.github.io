@@ -1,0 +1,60 @@
+<h3>Minkowski Diagrams!</h3>
+<div class="main-container">
+    <div class="canvas-container">
+        <canvas #canvas [width]="canvasBoundingRect.width" [height]="canvasBoundingRect.height"></canvas>
+    </div>
+
+    <div class="menu-container">
+        <mat-card class="mat-elevation-z8 controls">
+            <button mat-raised-button [color]="referenceFramesLocked ? 'primary' : 'accent'" (click)="lockReferenceFrames()">
+                {{referenceFramesLocked ? "Unlock Frames" : "Lock Frames"}}
+            </button>
+            <button mat-stroked-button color="primary" (click)="clearNormals()">Clear</button>
+            <p>Line Mode</p>
+            <mat-radio-group
+                aria-labelledby="example-radio-group-label"
+                class="example-radio-group"
+                [(ngModel)]="lineMode">
+                <mat-radio-button class="example-radio-button" *ngFor="let mode of lineModes" [value]="mode">
+                    {{mode}}
+                </mat-radio-button>
+            </mat-radio-group>
+            
+            <p>Line Showing</p>
+            <mat-checkbox *ngFor="let ref of refernceFrameAngles" 
+                [checked]="gridFrames.includes(ref)"
+                (change)="onLineShowingChange(ref, $event.checked)">
+                {{getDegreeStr(ref)}}
+            </mat-checkbox>
+
+            
+            <p>Cursor Mode</p>
+            <mat-radio-group
+                aria-labelledby="example-radio-group-label"
+                class="example-radio-group"
+                [(ngModel)]="cursorMode">
+                <mat-radio-button class="example-radio-button" *ngFor="let mode of lineModes" [value]="mode">
+                    {{mode}}
+                </mat-radio-button>
+            </mat-radio-group>
+
+            
+            <p>Cursor Showing</p>
+            <mat-checkbox *ngFor="let ref of refernceFrameAngles" 
+                [checked]="cursorFrames.includes(ref)"
+                (change)="onCursorShowingChange(ref, $event.checked)">
+                {{getDegreeStr(ref)}}
+            </mat-checkbox>
+        
+            <p>Ticks: {{numTicks}}</p>
+            <mat-slider
+                max="20"
+                min="0"
+                step="1">
+                <input matSliderThumb [(ngModel)]="numTicks"(change)="onTickChange()">
+            </mat-slider>
+
+            <button mat-stroked-button color="primary" (click)="addReferenceFrame()">Add Reference Frame</button>
+        </mat-card>
+    </div>
+</div>
