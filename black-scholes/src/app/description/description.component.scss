@@ -1,0 +1,24 @@
+
+.description-header-row {
+    margin-top: -4em;
+    width: 100%;
+    button {
+        margin-top: 1em;
+        float: right;
+        font-weight: bold;
+    };
+
+    .content-container {
+        width: 80%;
+        margin: auto;
+        margin-top: 2em;
+        mat-card {
+            padding: 0em 1em;
+            p {
+                a:link, a:visited, a:hover, a:active {
+                    color: black;
+                }
+            }
+        }
+    }
+}

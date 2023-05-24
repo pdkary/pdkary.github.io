@@ -1,0 +1,15 @@
+.main-container {
+
+    display: flex;
+    padding: auto;
+    .canvas-container {
+        width: 80%;
+        height: 80%;
+        canvas {
+            border: 3px solid gold;
+        }
+    }
+    .menu-container {
+        margin-right: 2em;
+    }
+}

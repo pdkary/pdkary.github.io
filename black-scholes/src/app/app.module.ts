@@ -34,6 +34,17 @@ import { MatTooltipModule} from '@angular/material/tooltip';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { RubixComponent } from './rubix/rubix.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { MinkowskiComponent } from './minkowski/minkowski.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatRadioModule} from '@angular/material/radio';
+import { GraphComponent } from './graph/graph.component';
+import { LilRobotComponent } from './lil-robot/lil-robot.component';
+import { LilRobotsComponent } from './lil-robots/lil-robots.component';
+import { RobotStateTransitionCardComponent } from './robot-state-transition-card/robot-state-transition-card.component';
+import { GraphingComponent } from './graphing/graphing.component';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { DescriptionComponent } from './description/description.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -44,7 +55,14 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     LinksComponent,
     TitleComponent,
     BlackScholesComponent,
-    RubixComponent
+    RubixComponent,
+    MinkowskiComponent,
+    GraphComponent,
+    LilRobotComponent,
+    LilRobotsComponent,
+    RobotStateTransitionCardComponent,
+    GraphingComponent,
+    DescriptionComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +91,11 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     MatButtonModule,
     MatListModule,
     MatDividerModule,
-    MatCardModule
+    MatCardModule,
+    MatSlideToggleModule,
+    MatSliderModule,
+    MatRadioModule,
+    ColorPickerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

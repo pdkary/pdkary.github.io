@@ -1,0 +1,12 @@
+
+<div class="description-header-row">
+    <button mat-stroked-button color="primary" class="what-is-this-button" (click)="toggleContent()">
+        {{showContent ?  "Close Desc": "What is this?"}}
+    </button>
+    <div class="content-container" *ngIf="showContent">
+        <mat-card>
+            <ng-content>
+            </ng-content>
+        </mat-card>
+    </div>
+</div>

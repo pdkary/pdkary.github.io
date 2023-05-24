@@ -1,0 +1,85 @@
+
+<description>
+    <h3>A Fun little State Machine Simulation game</h3>
+    <mat-divider></mat-divider>
+    <p>
+        Based on a problem proposed in 1957 by John Myhill, the <a href="https://en.wikipedia.org/wiki/Firing_squad_synchronization_problem">Firing Squad Synchronization Problem</a>
+        depicts a scenario in which your goal is to have all of your N robots perform an action at the same time. 
+        <br><br>
+        Obviously there are several constraints, or else this would be too easy. <b>Here are the rules:</b>
+        <br>
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;<b>1)</b> Each robot can communicate only with body language
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;<b>2)</b> Each robot can only see its immediate neighbors
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;<b>3)</b> Each robot can only change its position on the beat (The arrow button) 
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;<b>4)</b> Each robot can only change its position based on a set of defined transitions
+        <br><br>
+        Your goal is to define a set of transitions, that when played out, will result in every robot performing the same action, on some beat (click of the arrow button).
+        <br><br>
+        State transitions can be defined using the "State transition cards". These cards represent what a robot will do, given its current state,
+        and the state of the robots on either side of it. You can select your desired states by clicking on the robot body part you would like to adjust.
+        <br><br>
+        Arms, legs, and the head can all be rotated through a defined set of 3 colors.
+        <br>
+        Arms can be positioned up or down.
+        <br><br>
+        Robots can also be put into a <b>Wildcard</b> state, using the <mat-icon>question_mark</mat-icon> in which they will match a robot in any position.
+        <lil-robot
+        [size]="4"
+        [isInteractive]="false"
+        [initialState]="getWildcardRobot()">
+    </lil-robot>
+    Or they can be marked as an <b>Edge</b>, using the <mat-icon>border_left</mat-icon> or <mat-icon>border_right</mat-icon>.
+        These will be useful for creating specific states for your edge robots. They look like this:
+        <lil-robot
+            [size]="4"
+            [isInteractive]="false"
+            [isEdge]="true">
+        </lil-robot>
+        <br><br>
+        In its current demo state, pressing the <mat-icon>start</mat-icon> will start a wave that passes to the end of the line, before returnign back to the sender.
+        <br><br>
+        <b>Note: </b> The demo state will not do anything unless one robot is initially raising their hand.
+    </p>
+</description>
+<div class="robot-control-container">
+    
+    <button mat-fab color="primary" (click)="onAddRobotClicked()">
+        <mat-icon>add</mat-icon>
+    </button>
+    <button mat-fab color="primary" (click)="onRemoveRobotClicked()">
+        <mat-icon>remove</mat-icon>
+    </button>
+    <!-- <button mat-fab color="primary" (click)="logtTransitionsJSON()">
+        <mat-icon>save</mat-icon>
+    </button> -->
+</div>
+<div class="robot-playground">
+    <lil-robot *ngFor="let bot of robots; let i = index" 
+        [size]="robotSize" 
+        [initialState]="bot"
+        (onChange)="onRobotChange($event, i)">
+    </lil-robot>
+</div>
+
+<div class="button-container">
+    <button mat-fab color="accent" (click)="onAddClicked()">
+        <mat-icon>add</mat-icon>
+    </button>
+    <button mat-fab color="accent" (click)="applyTransitions()">
+        <mat-icon>start</mat-icon>
+    </button>
+    <button mat-fab color="accent" (click)="setDefaultState()">
+        <mat-icon>refresh</mat-icon>
+    </button>
+</div>
+
+<div class="transition-container">
+    <robot-state-transition-card *ngFor="let transiton of transitions; let i = index"
+        [robotSize]="transitionSize"
+        [stateTransition]="transiton"
+        [active]="transitionOn[i]"
+        (onChange)="onTransitionChange($event, i)"
+        (onActiveChange)="onTransitionActivityChange($event, i)"
+        (removeClicked)="onTransitionRemoveClicked(i)"
+    ></robot-state-transition-card>
+</div>

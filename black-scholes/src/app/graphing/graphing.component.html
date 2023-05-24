@@ -1,0 +1,134 @@
+<description>
+    <h3>A Reactive Graphing Component</h3>
+    <mat-divider></mat-divider>
+    <p>
+        The below component utilizes <b><a href="https://mathjs.org/">MathJs</a></b> to parse user input as functions,
+        and a <b><a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D">CanvasRenderingContext2D</a></b>
+        to display these functions on the screen.
+        <br><br>
+        The component is highly configurable, taking all the values seen in the controller on the right hand side as angular Inputs.
+        This allows the user to control positioning, precision, color, gridlines, and range of their inputted functions.
+        <br><br>
+        Numerous functions can be added, and functions can quickly be swapped between <b> f(x) = y</b> and <b> f(y) = x</b> function types.
+        <br><br>
+        Ok that's all well and good, but what is this <b>Warp Angle?</b>
+        <br><br>
+        Well don't you have egg on your face, because you clearly aren't familiar with a <b><a href="https://en.wikipedia.org/wiki/Lorentz_transformation">Lorentz Transform</a></b>.
+        <br><br>
+        <b>TL;DR:</b> A <b>Lorentz Transform</b> allows you to compare simultaneity between two different space time reference frames, and forms a fun little squishy transformation.
+        <br><br>
+        This was the original drive to create this project, such that I could use it to solve space-time problems, the project grew from there and now I have my own little desmos.
+    </p>
+</description>
+
+<mat-card>
+    <div class="main-container">
+        <div class="graph-container">   
+            <kary-graph
+            #graphComponent
+            [functionPrecision]="functionPrecision"
+            [lorenzAngle]="lorenzAngle"
+            [xStart]="xStart"
+            [xEnd]="xEnd"
+            [yStart]="yStart"
+            [yEnd]="yEnd"
+            [gridLines]="gridLines"
+            [lorenzGridLines]="lorenzGridLines"
+            [cursorLines]="cursorLines"
+            [lorenzCursorLines]="lorenzCursorLines"
+            [cursorMode]="cursorMode"
+            ></kary-graph>
+        </div>
+        
+        <div class="menu-container">
+            <mat-card class="mat-elevation-z8 function-input-card">
+                <div class="function-header">
+                    <h3>Functions</h3>
+                    <button mat-button color="primary" (click)="graphComponent.onAddFunction()">+ Add</button>
+                </div>
+                <div class="function-input" *ngFor="let funcString of graphComponent.funcStrings; let i = index; trackBy: trackByIndex">
+                    <div class="color-picker-container">
+                        <input [(colorPicker)]="graphComponent.functionColors[i]" [style.background]="graphComponent.functionColors[i]" (colorPickerChange)="graphComponent.onInputChange($event)"/>
+                    </div>
+                    <mat-form-field>
+                        <input matInput type="text" [(ngModel)]="graphComponent.funcStrings[i]" [value]="funcString" (input)="graphComponent.onInputChange($event)"/>
+                    </mat-form-field>
+                    <button class="remove-button" mat-icon-button color="primary" (click)="graphComponent.onRemoveFunction(i)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <button class="invert-button" mat-icon-button [color]="graphComponent.functionInverted[i] ? 'accent' : 'primary'" (click)="graphComponent.onInvertFunction(i)">
+                        <mat-icon>flip</mat-icon>
+                    </button>
+                </div>
+            </mat-card>
+        
+            <mat-card class="mat-elevation-z8 controls">
+                <h3>Ranges</h3>
+                <div class="xrange-container">
+                    <mat-form-field>
+                        <mat-label>X Start</mat-label>
+                        <input matInput type="number" [(ngModel)]="xStart" [value]="xStart" (change)="graphComponent.onInputChange($event)"/>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>X End</mat-label>
+                        <input matInput type="number" [(ngModel)]="xEnd" [value]="xEnd" (change)="graphComponent.onInputChange($event)"/>
+                    </mat-form-field>
+                </div>
+            
+                <div class="xrange-container">
+                    <mat-form-field>
+                        <mat-label>Y Start</mat-label>
+                        <input matInput type="number" [(ngModel)]="yStart" [value]="yStart" (change)="graphComponent.onInputChange($event)"/>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Y End</mat-label>
+                        <input matInput type="number" [(ngModel)]="yEnd" [value]="yEnd" (change)="graphComponent.onInputChange($event)"/>
+                    </mat-form-field>
+                </div>
+            </mat-card>
+
+            <mat-card class="mat-elevation-z8 controls">
+                <h3>Settings</h3>
+                <div class="checkbox-container">
+                    <mat-checkbox color="accent" [(ngModel)]="gridLines" (click)="graphComponent.onInputChange($event)">Gridlines</mat-checkbox>
+                    <mat-checkbox color="accent" [(ngModel)]="lorenzGridLines" (click)="graphComponent.onInputChange($event)">Warped gridlines</mat-checkbox>
+                </div>
+            
+                <div class="slider-container">
+                    <p>Warp Angle: {{180*lorenzAngle/pi}}</p>
+                    <mat-slider
+                    max="0.78539816339"
+                    min="0"
+                    step="0.004">
+                        <input matSliderThumb [(ngModel)]="lorenzAngle" (valueChange)="graphComponent.onSliderChange()">
+                    </mat-slider>
+                </div>
+        
+                <div class="slider-container">
+                    <p>Graph Precision: {{functionPrecision}}</p>
+                    <mat-slider
+                    max="20"
+                    min="1"
+                    step="1">
+                        <input matSliderThumb [(ngModel)]="functionPrecision" (valueChange)="graphComponent.onSliderChange()">
+                    </mat-slider>
+                </div>
+
+                <div class="checkbox-container">
+                    <mat-checkbox color="accent" [(ngModel)]="cursorLines" (click)="graphComponent.onInputChange($event)">Cursor gridlines</mat-checkbox>
+                    <mat-checkbox color="accent" [(ngModel)]="lorenzCursorLines" (click)="graphComponent.onInputChange($event)">Warped cursor gridlines</mat-checkbox>
+                </div>
+                
+                <p>Cursor Mode</p>
+                <mat-radio-group
+                aria-labelledby="example-radio-group-label"
+                class="example-radio-group"
+                [(ngModel)]="cursorMode">
+                    <mat-radio-button class="example-radio-button" *ngFor="let mode of cursorModes" [value]="mode">
+                        {{mode}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </mat-card>
+        </div>
+    </div>
+</mat-card>
